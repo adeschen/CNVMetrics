@@ -264,38 +264,39 @@ function toggle_visibility(id1) {
 <div id="TOC">
 <ul>
 <li><a href="#licensing"><span class="toc-section-number">1</span> Licensing</a></li>
-<li><a href="#introduction"><span class="toc-section-number">2</span> Introduction</a></li>
-<li><a href="#installation"><span class="toc-section-number">3</span> Installation</a></li>
+<li><a href="#mathjax"><span class="toc-section-number">2</span> Mathjax</a></li>
+<li><a href="#introduction"><span class="toc-section-number">3</span> Introduction</a></li>
+<li><a href="#installation"><span class="toc-section-number">4</span> Installation</a></li>
 <li>
-<a href="#workflow-for-metrics-calculated-using-cnv-status-calls"><span class="toc-section-number">4</span> Workflow for metrics calculated using <em>CNV status calls</em></a>
+<a href="#workflow-for-metrics-calculated-using-cnv-status-calls"><span class="toc-section-number">5</span> Workflow for metrics calculated using <em>CNV status calls</em></a>
 <ul>
-<li><a href="#data-input---copy-number-file"><span class="toc-section-number">4.1</span> Data Input - Copy number file</a></li>
-<li><a href="#data-importation---grangeslist"><span class="toc-section-number">4.2</span> Data Importation - GRangesList</a></li>
-<li><a href="#metric-calculation"><span class="toc-section-number">4.3</span> Metric Calculation</a></li>
-<li><a href="#metric-visualization"><span class="toc-section-number">4.4</span> Metric Visualization</a></li>
+<li><a href="#data-input---copy-number-file"><span class="toc-section-number">5.1</span> Data Input - Copy number file</a></li>
+<li><a href="#data-importation---grangeslist"><span class="toc-section-number">5.2</span> Data Importation - GRangesList</a></li>
+<li><a href="#metric-calculation"><span class="toc-section-number">5.3</span> Metric Calculation</a></li>
+<li><a href="#metric-visualization"><span class="toc-section-number">5.4</span> Metric Visualization</a></li>
 </ul>
 </li>
 <li>
-<a href="#metrics-using-the-cnv-status-calls"><span class="toc-section-number">5</span> Metrics using the <em>CNV status calls</em></a>
+<a href="#metrics-using-the-cnv-status-calls"><span class="toc-section-number">6</span> Metrics using the <em>CNV status calls</em></a>
 <ul>
-<li><a href="#s%C3%B8rensen"><span class="toc-section-number">5.1</span> Sørensen</a></li>
-<li><a href="#szymkiewiczsimpson"><span class="toc-section-number">5.2</span> Szymkiewicz–Simpson</a></li>
-<li><a href="#jaccard"><span class="toc-section-number">5.3</span> Jaccard</a></li>
+<li><a href="#s%C3%B8rensen"><span class="toc-section-number">6.1</span> Sørensen</a></li>
+<li><a href="#szymkiewiczsimpson"><span class="toc-section-number">6.2</span> Szymkiewicz–Simpson</a></li>
+<li><a href="#jaccard"><span class="toc-section-number">6.3</span> Jaccard</a></li>
 </ul>
 </li>
 <li>
-<a href="#metrics-using-the-level-of-amplificationdeletion"><span class="toc-section-number">6</span> Metrics using the level of amplification/deletion</a>
+<a href="#metrics-using-the-level-of-amplificationdeletion"><span class="toc-section-number">7</span> Metrics using the level of amplification/deletion</a>
 <ul>
-<li><a href="#weighted-euclidean-distance"><span class="toc-section-number">6.1</span> Weighted Euclidean Distance</a></li>
+<li><a href="#weighted-euclidean-distance"><span class="toc-section-number">7.1</span> Weighted Euclidean Distance</a></li>
 </ul>
 </li>
 <li>
-<a href="#supplementary-information"><span class="toc-section-number">7</span> Supplementary information</a>
+<a href="#supplementary-information"><span class="toc-section-number">8</span> Supplementary information</a>
 <ul>
-<li><a href="#creating-your-own-grangeslist"><span class="toc-section-number">7.1</span> Creating your own GRangesList</a></li>
+<li><a href="#creating-your-own-grangeslist"><span class="toc-section-number">8.1</span> Creating your own GRangesList</a></li>
 </ul>
 </li>
-<li><a href="#session-info"><span class="toc-section-number">8</span> Session info</a></li>
+<li><a href="#session-info"><span class="toc-section-number">9</span> Session info</a></li>
 <li><a href="#references">References</a></li>
 </ul>
 </div>
@@ -310,9 +311,15 @@ Alexander Krasnitz [aut]<br><strong>Version</strong>: 0.1.4<br><strong>Compiled 
 <em><a href="https://github.com/KrasnitzLab/CNVMetrics">CNVMetrics</a></em> code are distributed under the
 Artistic license 2.0. You are free to use and redistribute this software.</p>
 </div>
-<div id="introduction" class="section level1" number="2">
+<div id="mathjax" class="section level1" number="2">
 <h1 class="hasAnchor">
-<a href="#introduction" class="anchor"></a><span class="header-section-number">2</span> Introduction</h1>
+<a href="#mathjax" class="anchor"></a><span class="header-section-number">2</span> Mathjax</h1>
+<p><span class="math display">\[f(x) = \dfrac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu^2)}{2\sigma^2}}\]</span></p>
+<p>Inline equations: <span class="math inline">\(y=x^2\)</span></p>
+</div>
+<div id="introduction" class="section level1" number="3">
+<h1 class="hasAnchor">
+<a href="#introduction" class="anchor"></a><span class="header-section-number">3</span> Introduction</h1>
 <p>Copy number variation (CNV) includes multiplication and deletion of DNA
 segment. Copy number variations have been shown to be associated
 with a wide spectrum of pathological conditions and complex traits, such
@@ -347,9 +354,9 @@ while others are based on the level of amplification/deletion. Finally, a
 visualization tool is provided to explore resulting metrics in the form of
 sample-to-sample heatmaps.</p>
 </div>
-<div id="installation" class="section level1" number="3">
+<div id="installation" class="section level1" number="4">
 <h1 class="hasAnchor">
-<a href="#installation" class="anchor"></a><span class="header-section-number">3</span> Installation</h1>
+<a href="#installation" class="anchor"></a><span class="header-section-number">4</span> Installation</h1>
 <p>To install the latest version accessible on the
 <a href="https://github.com/KrasnitzLab/CNVMetrics" title="CNVMetrics Github Site">CNVMetrics Github Website</a>,
 the <em><a href="https://CRAN.R-project.org/package=devtools">devtools</a></em> package is required.</p>
@@ -369,9 +376,9 @@ releases is posted on the <a href="https://github.com/KrasnitzLab/CNVMetrics/rel
 <span class="co">## using 'ref' parameter</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">'KrasnitzLab/CNVMetrics'</span>, ref <span class="op">=</span> <span class="st">"v0.1.4"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="workflow-for-metrics-calculated-using-cnv-status-calls" class="section level1" number="4">
+<div id="workflow-for-metrics-calculated-using-cnv-status-calls" class="section level1" number="5">
 <h1 class="hasAnchor">
-<a href="#workflow-for-metrics-calculated-using-cnv-status-calls" class="anchor"></a><span class="header-section-number">4</span> Workflow for metrics calculated using <em>CNV status calls</em>
+<a href="#workflow-for-metrics-calculated-using-cnv-status-calls" class="anchor"></a><span class="header-section-number">5</span> Workflow for metrics calculated using <em>CNV status calls</em>
 </h1>
 <p>The following figure gives an overview of the capabilities of
 <em><a href="https://github.com/KrasnitzLab/CNVMetrics">CNVMetrics</a></em> to calculate metrics using the
@@ -398,9 +405,9 @@ releases is posted on the <a href="https://github.com/KrasnitzLab/CNVMetrics/rel
 </tbody>
 </table></div>
 <p>The <code>package::function()</code> notation is used for functions from other packages.</p>
-<div id="data-input---copy-number-file" class="section level2" number="4.1">
+<div id="data-input---copy-number-file" class="section level2" number="5.1">
 <h2 class="hasAnchor">
-<a href="#data-input---copy-number-file" class="anchor"></a><span class="header-section-number">4.1</span> Data Input - Copy number file</h2>
+<a href="#data-input---copy-number-file" class="anchor"></a><span class="header-section-number">5.1</span> Data Input - Copy number file</h2>
 <p><em>CNV status calls</em> are represented as segments with a copy number state. The
 state be general, such as “amplification,” “deletion” or “neutral,” or more
 specific such as TODO.</p>
@@ -422,9 +429,9 @@ those segments won’t be retain for the calculation of the metrics.</p>
 Figure 2: <span class="caption-title">Example of a copy number file containing CNV calls</span><br></p>
 </div>
 </div>
-<div id="data-importation---grangeslist" class="section level2" number="4.2">
+<div id="data-importation---grangeslist" class="section level2" number="5.2">
 <h2 class="hasAnchor">
-<a href="#data-importation---grangeslist" class="anchor"></a><span class="header-section-number">4.2</span> Data Importation - GRangesList</h2>
+<a href="#data-importation---grangeslist" class="anchor"></a><span class="header-section-number">5.2</span> Data Importation - GRangesList</h2>
 <p>The input format for the copy number information, as needed by the
 <code><a href="../reference/calculateOverlapMetric.html">calculateOverlapMetric()</a></code> function, is a <code>GRangesList</code> object.</p>
 <p>The easiest way to generate a <code>GRangesList</code> object is to first load the
@@ -489,9 +496,9 @@ from ten mouse pancreatic organoids <span class="citation">(Oni et al. 2020)</sp
 ## ...
 ## &lt;9 more elements&gt;</code></pre>
 </div>
-<div id="metric-calculation" class="section level2" number="4.3">
+<div id="metric-calculation" class="section level2" number="5.3">
 <h2 class="hasAnchor">
-<a href="#metric-calculation" class="anchor"></a><span class="header-section-number">4.3</span> Metric Calculation</h2>
+<a href="#metric-calculation" class="anchor"></a><span class="header-section-number">5.3</span> Metric Calculation</h2>
 <p>The calculation of the similarity metrics is done with the
 <code><a href="../reference/calculateOverlapMetric.html">calculateOverlapMetric()</a></code> function.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -520,9 +527,9 @@ from ten mouse pancreatic organoids <span class="citation">(Oni et al. 2020)</sp
 ## mM6  0.0000000 0.0000000 0.0000000 0.00918594  NA
 ## [ -- omitted 5 rows/columns ]</code></pre>
 </div>
-<div id="metric-visualization" class="section level2" number="4.4">
+<div id="metric-visualization" class="section level2" number="5.4">
 <h2 class="hasAnchor">
-<a href="#metric-visualization" class="anchor"></a><span class="header-section-number">4.4</span> Metric Visualization</h2>
+<a href="#metric-visualization" class="anchor"></a><span class="header-section-number">5.4</span> Metric Visualization</h2>
 <p>A heatmap of this similarity metrics can be a useful tool to get an overview
 over similarities and dissimilarities between samples.</p>
 <p>The <code><a href="../reference/plotOverlapMetric.html">plotOverlapMetric()</a></code> function generates a graphical representation of
@@ -577,17 +584,17 @@ the <code><a href="https://rdrr.io/pkg/pheatmap/man/pheatmap.html">pheatmap::phe
 <p><br></p>
 </div>
 </div>
-<div id="metrics-using-the-cnv-status-calls" class="section level1" number="5">
+<div id="metrics-using-the-cnv-status-calls" class="section level1" number="6">
 <h1 class="hasAnchor">
-<a href="#metrics-using-the-cnv-status-calls" class="anchor"></a><span class="header-section-number">5</span> Metrics using the <em>CNV status calls</em>
+<a href="#metrics-using-the-cnv-status-calls" class="anchor"></a><span class="header-section-number">6</span> Metrics using the <em>CNV status calls</em>
 </h1>
 <p>This survey represents the overlap metrics that are implemented in
 <em><a href="https://github.com/KrasnitzLab/CNVMetrics">CNVMetrics</a></em> package. Those metrics are calculated
 using the <em>CNV status calls</em>. The size of the amplified/deleted regions as
 well as the size of the overlapping of regions are always in base paired.</p>
-<div id="sørensen" class="section level2" number="5.1">
+<div id="sørensen" class="section level2" number="6.1">
 <h2 class="hasAnchor">
-<a href="#s%C3%B8rensen" class="anchor"></a><span class="header-section-number">5.1</span> Sørensen</h2>
+<a href="#s%C3%B8rensen" class="anchor"></a><span class="header-section-number">6.1</span> Sørensen</h2>
 <p>The Sørensen coefficient <span class="citation">(Sørensen 1948)</span> is calculated by dividing twice the
 size of the intersection by the sum of the size of the two sets:</p>
 <p><span class="math display" id="eq:sorensen">\[\begin{equation}
@@ -596,9 +603,9 @@ size of the intersection by the sum of the size of the two sets:</p>
 \end{equation}\]</span></p>
 <p>where <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> represent the regions of each sample in base paired.</p>
 </div>
-<div id="szymkiewiczsimpson" class="section level2" number="5.2">
+<div id="szymkiewiczsimpson" class="section level2" number="6.2">
 <h2 class="hasAnchor">
-<a href="#szymkiewiczsimpson" class="anchor"></a><span class="header-section-number">5.2</span> Szymkiewicz–Simpson</h2>
+<a href="#szymkiewiczsimpson" class="anchor"></a><span class="header-section-number">6.2</span> Szymkiewicz–Simpson</h2>
 <p>The Szymkiewicz–Simpson coefficient <span class="citation">(Vijaymeena and K. 2016)</span>, also known as the
 overlap coefficient, is calculated by dividing the size of the intersection
 by the smaller of the size of the two sets:</p>
@@ -610,9 +617,9 @@ by the smaller of the size of the two sets:</p>
 set <span class="math inline">\(X\)</span> is a subset of <span class="math inline">\(Y\)</span> or vice versa, the overlap coefficient
 value is 1.</p>
 </div>
-<div id="jaccard" class="section level2" number="5.3">
+<div id="jaccard" class="section level2" number="6.3">
 <h2 class="hasAnchor">
-<a href="#jaccard" class="anchor"></a><span class="header-section-number">5.3</span> Jaccard</h2>
+<a href="#jaccard" class="anchor"></a><span class="header-section-number">6.3</span> Jaccard</h2>
 <p>The Jaccard coefficient <span class="citation">(Jaccard 1912)</span>, also known as coefficient of
 community, is calculated by dividing the size
 of the intersection by the smaller of the size of the two sets:</p>
@@ -623,17 +630,17 @@ of the intersection by the smaller of the size of the two sets:</p>
 <p>where  and <span class="math inline">\(Y\)</span> represent the regions of each sample in base paired.</p>
 </div>
 </div>
-<div id="metrics-using-the-level-of-amplificationdeletion" class="section level1" number="6">
+<div id="metrics-using-the-level-of-amplificationdeletion" class="section level1" number="7">
 <h1 class="hasAnchor">
-<a href="#metrics-using-the-level-of-amplificationdeletion" class="anchor"></a><span class="header-section-number">6</span> Metrics using the level of amplification/deletion</h1>
+<a href="#metrics-using-the-level-of-amplificationdeletion" class="anchor"></a><span class="header-section-number">7</span> Metrics using the level of amplification/deletion</h1>
 <p>This survey represents the similarity measures that are implemented in
 <em><a href="https://github.com/KrasnitzLab/CNVMetrics">CNVMetrics</a></em> package. Those metrics are calculated
 using the level of amplification/deletion. The level of
 amplification/deletion is in log2 ratio while the size of the regions
 is in base paired.</p>
-<div id="weighted-euclidean-distance" class="section level2" number="6.1">
+<div id="weighted-euclidean-distance" class="section level2" number="7.1">
 <h2 class="hasAnchor">
-<a href="#weighted-euclidean-distance" class="anchor"></a><span class="header-section-number">6.1</span> Weighted Euclidean Distance</h2>
+<a href="#weighted-euclidean-distance" class="anchor"></a><span class="header-section-number">7.1</span> Weighted Euclidean Distance</h2>
 <p>The Weighted Euclidean Distance corresponds to the euclidean distance between
 the log2 values of the two samples multiplied by the natural logarithm
 of the number of bases of the analyzed segments. The final metric is the
@@ -648,12 +655,12 @@ calculation.</p>
 paired.</p>
 </div>
 </div>
-<div id="supplementary-information" class="section level1" number="7">
+<div id="supplementary-information" class="section level1" number="8">
 <h1 class="hasAnchor">
-<a href="#supplementary-information" class="anchor"></a><span class="header-section-number">7</span> Supplementary information</h1>
-<div id="creating-your-own-grangeslist" class="section level2" number="7.1">
+<a href="#supplementary-information" class="anchor"></a><span class="header-section-number">8</span> Supplementary information</h1>
+<div id="creating-your-own-grangeslist" class="section level2" number="8.1">
 <h2 class="hasAnchor">
-<a href="#creating-your-own-grangeslist" class="anchor"></a><span class="header-section-number">7.1</span> Creating your own GRangesList</h2>
+<a href="#creating-your-own-grangeslist" class="anchor"></a><span class="header-section-number">8.1</span> Creating your own GRangesList</h2>
 <p>The <code><a href="https://rdrr.io/pkg/GenomicRanges/man/makeGRangesListFromDataFrame.html">GenomicRanges::makeGRangesListFromDataFrame()</a></code> function enables the
 creation of a list of <code>GRangesList</code> objects from a <code>data.frame</code>. However,
 <code>GRangesList</code> can also be generated and filled manually.</p>
@@ -674,9 +681,9 @@ creation of a list of <code>GRangesList</code> objects from a <code>data.frame</
 <span class="va">grl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/GRangesList-class.html">GRangesList</a></span><span class="op">(</span><span class="st">"sample01"</span><span class="op">=</span><span class="va">gr1</span>, <span class="st">"sample02"</span><span class="op">=</span><span class="va">gr2</span>, <span class="st">"sample03"</span><span class="op">=</span><span class="va">gr3</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="session-info" class="section level1" number="8">
+<div id="session-info" class="section level1" number="9">
 <h1 class="hasAnchor">
-<a href="#session-info" class="anchor"></a><span class="header-section-number">8</span> Session info</h1>
+<a href="#session-info" class="anchor"></a><span class="header-section-number">9</span> Session info</h1>
 <p>Here is the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo()</a></code> on the system on which this document was
 compiled:</p>
 <pre><code>## R version 4.0.3 (2020-10-10)
