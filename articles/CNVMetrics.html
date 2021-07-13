@@ -6,7 +6,7 @@
 <meta name="generator" content="pandoc">
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE">
 <meta name="author" content="Astrid Deschênes, Pascal Belleau and Alexander Krasnitz">
-<meta name="date" content="2021-07-01">
+<meta name="date" content="2021-07-13">
 <title>Quantifying similarity between copy number profiles</title>
 <script src="CNVMetrics_files/header-attrs-2.6/header-attrs.js"></script><script src="CNVMetrics_files/jquery-1.11.3/jquery.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="CNVMetrics_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -256,7 +256,7 @@ function toggle_visibility(id1) {
 <h1 class="hasAnchor">
 <a href="#header" class="anchor"></a>Quantifying similarity between copy number profiles</h1>
 <p class="author-name">Astrid Deschênes, Pascal Belleau and Alexander Krasnitz</p>
-<h4 class="date">1 July 2021</h4>
+<h4 class="date">13 July 2021</h4>
 
 </div>
 
@@ -302,7 +302,7 @@ function toggle_visibility(id1) {
 
 <p><br><strong>Package</strong>: <em>CNVMetrics</em><br><strong>Authors</strong>: Astrid Deschênes [aut, cre] (<a href="https://orcid.org/0000-0001-7846-6749" class="uri">https://orcid.org/0000-0001-7846-6749</a>),
 Pascal Belleau [aut] (<a href="https://orcid.org/0000-0002-0802-1071" class="uri">https://orcid.org/0000-0002-0802-1071</a>),
-Alexander Krasnitz [aut]<br><strong>Version</strong>: 0.1.4<br><strong>Compiled date</strong>: 2021-07-01<br><strong>License</strong>: Artistic-2.0<br></p>
+Alexander Krasnitz [aut]<br><strong>Version</strong>: 0.1.4<br><strong>Compiled date</strong>: 2021-07-13<br><strong>License</strong>: Artistic-2.0<br></p>
 <div id="licensing" class="section level1" number="1">
 <h1 class="hasAnchor">
 <a href="#licensing" class="anchor"></a><span class="header-section-number">1</span> Licensing</h1>
@@ -550,9 +550,9 @@ are valid arguments.</p>
 <p><img src="CNVMetrics_files/figure-html/demoPlot02-1.png" width="100%" style="display: block; margin: auto;"></p>
 <p><br></p>
 <p><br></p>
-<p>Row and/or column annotation is often useful and can easy by included with
-the <code>annotation_row</code> or <code>annotation_col</code> arguments, as described in the
-<code><a href="https://rdrr.io/pkg/pheatmap/man/pheatmap.html">pheatmap::pheatmap</a></code> method.</p>
+<p>Row and/or column annotation is often useful and can easily be done
+by using the <code>annotation_row</code> or <code>annotation_col</code> arguments, as described in
+the <code><a href="https://rdrr.io/pkg/pheatmap/man/pheatmap.html">pheatmap::pheatmap</a></code> method.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Load file containing annotations for the mouse organoids</span>
 <span class="co">## The mouse ID identifying the source of the sample</span>
@@ -565,7 +565,6 @@ the <code>annotation_row</code> or <code>annotation_col</code> arguments, as des
 <span class="co">## in the CNVMetric object</span>
 <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">annotOrg</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">annotOrg</span><span class="op">$</span><span class="va">ID</span>
 <span class="va">annotOrg</span><span class="op">$</span><span class="va">ID</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
-
 <span class="fu"><a href="https://rdrr.io/r/base/all.html">all</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">annotOrg</span><span class="op">)</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">metric</span><span class="op">$</span><span class="va">AMPLIFICATION</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
@@ -621,7 +620,7 @@ of the intersection by the smaller of the size of the two sets:</p>
   \frac{\left| X \cap Y \right| }{ \left| X \cup Y \right|}
   \tag{3}
 \end{equation}\]</span></p>
-<p>where <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> represent the regions of each sample in base paired.</p>
+<p>where  and <span class="math inline">\(Y\)</span> represent the regions of each sample in base paired.</p>
 </div>
 </div>
 <div id="metrics-using-the-level-of-amplificationdeletion" class="section level1" number="6">
