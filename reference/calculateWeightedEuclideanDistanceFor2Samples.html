@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate Weighted Euclidean distance metric between samples. — calculateWeightedEuclideanDistanceFor2Samples • CNVMetrics</title>
+<title>Calculate Weighted Euclidean distance-based metric between samples. — calculateWeightedEuclideanDistanceFor2Samples • CNVMetrics</title>
 
 
 <!-- jquery -->
@@ -41,10 +41,11 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Calculate Weighted Euclidean distance metric between samples. — calculateWeightedEuclideanDistanceFor2Samples" />
-<meta property="og:description" content="The weighted Euclidean distance metric corresponds to the
+<meta property="og:title" content="Calculate Weighted Euclidean distance-based metric between samples. — calculateWeightedEuclideanDistanceFor2Samples" />
+<meta property="og:description" content="The weighted Euclidean distance-based metric corresponds to the
 euclidean distance between 2 samples multiplied by the natural logarithm 
-of the number of bases of the analyzed segment. The final metric is the 
+of the number of bases of the analyzed segment. The final metric is 1 over
+1 added to the 
 squared sum of the values obtained for all segments that are not 
 excluded of the analysis." />
 
@@ -120,15 +121,16 @@ excluded of the analysis." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculate Weighted Euclidean distance metric between samples.</h1>
+    <h1>Calculate Weighted Euclidean distance-based metric between samples.</h1>
     <small class="dont-index">Source: <a href='https://github.com/krasnitzlab/CNVMetrics/blob/master/R/CNVMetricsLog2ratioInternalMethods.R'><code>R/CNVMetricsLog2ratioInternalMethods.R</code></a></small>
     <div class="hidden name"><code>calculateWeightedEuclideanDistanceFor2Samples.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The weighted Euclidean distance metric corresponds to the
+    <p>The weighted Euclidean distance-based metric corresponds to the
 euclidean distance between 2 samples multiplied by the natural logarithm 
-of the number of bases of the analyzed segment. The final metric is the 
+of the number of bases of the analyzed segment. The final metric is 1 over
+1 added to the 
 squared sum of the values obtained for all segments that are not 
 excluded of the analysis.</p>
     </div>
@@ -162,7 +164,7 @@ assigned.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The weighted euclidean distance is 
-\((\sum((x_i - y_i)^2 * log(nbrBases_i))^0.5\) 
+\(1/(1 + (\sum((x_i - y_i)^2 * log(nbrBases_i))^0.5)\) 
 where <code>x</code> and <code>y</code> are the
 values of 2 samples for a specific segment <code>i</code> and <code>nbrBases</code> the 
 number of bases of the segment <code>i</code>.</p>
@@ -194,7 +196,7 @@ number of bases of the segment <code>i</code>.</p>
 <span class='co'>## Calculate the weighted ecucidean distance between the two samples</span>
 <span class='fu'>CNVMetrics</span><span class='fu'>:::</span><span class='fu'>calculateWeightedEuclideanDistanceFor2Samples</span><span class='op'>(</span>
     segmentData<span class='op'>=</span><span class='va'>disjoinGRange</span>, minThreshold<span class='op'>=</span><span class='fl'>0.2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 0</div><div class='input'>
+</div><div class='output co'>#&gt; [1] 1</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
