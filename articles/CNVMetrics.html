@@ -272,7 +272,7 @@ Example of a copy number file containing CNV calls.
 <span class="co">## So, the 'states' parameter doesn't have to be specified</span>
 <span class="co">## The 'states' parameter needs to be adjusted for user-specific states</span>
 <span class="co">## Ex: states=c("LOH", "gain")</span>
-<span class="va">metric</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calculateOverlapMetric.html">calculateOverlapMetric</a></span><span class="op">(</span><span class="va">grl</span>, method <span class="op">=</span> <span class="st">"sorensen"</span><span class="op">)</span>
+<span class="va">metric</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calculateOverlapMetric.html">calculateOverlapMetric</a></span><span class="op">(</span>segmentData<span class="op">=</span><span class="va">grl</span>, method<span class="op">=</span><span class="st">"sorensen"</span>, nJobs<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
 
 <span class="va">metric</span></code></pre></div>
 <pre><code>## CNV Metrics
@@ -489,7 +489,7 @@ Example of a copy number file containing log2ratio values.
 <p>The calculation of the similarity metrics is done with the <code><a href="../reference/calculateOverlapMetric.html">calculateOverlapMetric()</a></code> function.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">metricLog</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calculateLog2ratioMetric.html">calculateLog2ratioMetric</a></span><span class="op">(</span>segmentData<span class="op">=</span><span class="va">grlog</span>, 
-                              method<span class="op">=</span><span class="st">"weightedEuclideanDistance"</span><span class="op">)</span>
+                              method<span class="op">=</span><span class="st">"weightedEuclideanDistance"</span>, nJobs<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
 
 <span class="va">metricLog</span></code></pre></div>
 <pre><code>## CNV Metrics
