@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate metric using overlapping amplified/deleted regions — calculateOverlapMetric • CNVMetrics</title>
+<title>Calculate metric using overlapping amplified/deleted regions between 
+two samples. — calculateOneOverlapMetricT • CNVMetrics</title>
 
 
 <!-- jquery -->
@@ -41,13 +42,10 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Calculate metric using overlapping amplified/deleted regions — calculateOverlapMetric" />
+<meta property="og:title" content="Calculate metric using overlapping amplified/deleted regions between 
+two samples. — calculateOneOverlapMetricT" />
 <meta property="og:description" content="Calculate a specific metric using overlapping 
-regions of specific state between to samples. The metric is calculated for
-each state separately. When more than 2 samples are 
-present, the metric is calculated for each sample pair. By default, the
-function is calculating metrics for the AMPLIFICATION and DELETION states. 
-However, the user can specify the list of states to be analyzed." />
+amplified/deleted regions between two samples." />
 
 
 
@@ -121,30 +119,30 @@ However, the user can specify the list of states to be analyzed." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculate metric using overlapping amplified/deleted regions</h1>
-    <small class="dont-index">Source: <a href='https://github.com/krasnitzlab/CNVMetrics/blob/master/R/CNVMetricsMethods.R'><code>R/CNVMetricsMethods.R</code></a></small>
-    <div class="hidden name"><code>calculateOverlapMetric.Rd</code></div>
+    <h1>Calculate metric using overlapping amplified/deleted regions between 
+two samples.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/krasnitzlab/CNVMetrics/blob/master/R/CNVMetricsOverlapInternalMethods.R'><code>R/CNVMetricsOverlapInternalMethods.R</code></a></small>
+    <div class="hidden name"><code>calculateOneOverlapMetricT.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Calculate a specific metric using overlapping 
-regions of specific state between to samples. The metric is calculated for
-each state separately. When more than 2 samples are 
-present, the metric is calculated for each sample pair. By default, the
-function is calculating metrics for the AMPLIFICATION and DELETION states. 
-However, the user can specify the list of states to be analyzed.</p>
+amplified/deleted regions between two samples.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>calculateOverlapMetric</span><span class='op'>(</span>
-  <span class='va'>segmentData</span>,
-  states <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"AMPLIFICATION"</span>, <span class='st'>"DELETION"</span><span class='op'>)</span>,
-  method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"sorensen"</span>, <span class='st'>"szymkiewicz"</span>, <span class='st'>"jaccard"</span><span class='op'>)</span>,
-  nJobs <span class='op'>=</span> <span class='fl'>1</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>calculateOneOverlapMetricT</span><span class='op'>(</span><span class='va'>entry</span>, <span class='va'>segmentData</span>, <span class='va'>method</span>, <span class='va'>type</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>entry</th>
+      <td><p>a <code>list</code> which contains the row and column indexes 
+(always in this order) of 
+the metric in the final matrix. Those values correspond to the positions 
+of the two samples used
+to calculate the metric in the <code>GRangesList</code> (<code>segmentData</code>).</p></td>
+    </tr>
     <tr>
       <th>segmentData</th>
       <td><p>a <code>GRangesList</code> that contains a collection of 
@@ -154,78 +152,32 @@ called '<code>state</code>' with a state, in an character string format,
 specified for each region (ex: DELETION, LOH, AMPLIFICATION, NEUTRAL, etc.).</p></td>
     </tr>
     <tr>
-      <th>states</th>
-      <td><p>a <code>vector</code> of <code>character</code> string with at least one
-entry. The strings are representing the states that will be analyzed. 
-Default: c('<code>AMPLIFICATION</code>', '<code>DELETION</code>').</p></td>
-    </tr>
-    <tr>
       <th>method</th>
-      <td><p>a <code>character</code> string representing the metric to be used. 
-This should be (an unambiguous abbreviation of) one of "sorensen", 
-"szymkiewicz" or "jaccard". Default: "sorensen".</p></td>
+      <td><p>a <code>character</code> string representing the metric to be
+used ('<code>sorensen</code>' or '<code>szymkiewicz</code>'.</p></td>
     </tr>
     <tr>
-      <th>nJobs</th>
-      <td><p>a single positive <code>integer</code> specifying the number of 
-worker jobs to create in case of distributed computation. 
-Default: <code>1</code> and always <code>1</code> for Windows.</p></td>
+      <th>type</th>
+      <td><p>a <code>character</code> string representing the type of 
+copy number events to be used ('<code>AMPLIFICATION</code>' or '<code>DELETION</code>').</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>an object of class "<code>CNVMetric</code>" which contains the calculated
-metric. This object is a list where each entry corresponds to one state
-specified in the '<code>states</code>' parameter. Each entry is a <code>matrix</code>:</p><ul>
-<li><p><code>state</code> a lower-triangular <code>matrix</code> with the 
-    results of the selected metric on the amplified regions for each paired
-    samples. The value <code>NA</code> is present when the metric cannot be 
-    calculated. The value <code>NA</code> is also present in the top-triangular 
-    section, as well as the diagonal, of the matrix.</p></li>
+    <p>a <code>list</code> containing 1 entry:</p><ul>
+<li><p><code>metric</code> a <code>data.frame</code>, which contains 3 columns. The 2 
+first columns, called <code>row</code> and <code>column</code> correspond to the 
+indexes of the metric in the final matrix. Those
+2 first columns match to the <code>entry</code> parameter. The third column, 
+called <code>metric</code>, 
+contains the values of the specified metric for each combination. 
+If the metric cannot be calculated, <code>NA</code> is present.</p></li>
 </ul>
 
-<p>The object has the following attributes (besides "class" equal 
-to "CNVMetric"):</p><ul>
-<li><p><code>metric</code> the metric used for the calculation.</p></li>
-<li><p><code>names</code> the names of the two matrix containing the metrics for
-the amplified and deleted regions.</p></li>
-</ul>
-
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The two methods each estimate the overlap between paired samples. They use 
-different metrics, all in the range [0, 1] with 0 indicating no overlap. 
-The <code>NA</code> is used when the metric cannot be calculated.</p>
-<p>The available metrics are (written for two GRanges):</p>
-<p><code>sorensen</code>:</p>
-<p>This metric is calculated by dividing twice the size of the intersection 
-by the sum of the size of the two sets. 
-With this metric, an overlap metric value of 1 is only obtained when the
-two samples are identical.</p>
-<p><code>szymkiewicz</code>:</p>
-<p>This metric is calculated by dividing the size of the intersection 
-by the size of the smallest set. With this metric, if one set is a 
-subset of the other set, the overlap metric value is 1.</p>
-<p><code>jaccard</code>:</p>
-<p>This metric is calculated by dividing the size of the intersection 
-by the size of the union of the two sets. With this metric, an overlap 
-metric value of 1 is only obtained when the two samples are identical.</p>
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
-
-    <p>Sørensen, Thorvald. n.d. “A Method of Establishing Groups of Equal 
-Amplitude in Plant Sociology Based on Similarity of Species and Its 
-Application to Analyses of the Vegetation on Danish Commons.” 
-Biologiske Skrifter, no. 5: 1–34.</p>
-<p>Vijaymeena, M. K, and Kavitha K. 2016. “A Survey on Similarity Measures in 
-Text Mining.” Machine Learning and Applications: An International 
-Journal 3 (1): 19–28. doi: <a href='https://doi.org/10.5121/mlaij.2016.3103'>https://doi.org/10.5121/mlaij.2016.3103</a></p>
-<p>Jaccard, P. (1912), The Distribution of the Flora in the Alpine Zone.  
-New Phytologist, 11: 37-50. 
-doi: <a href='https://doi.org/10.1111/j.1469-8137.1912.tb05611.x'>https://doi.org/10.1111/j.1469-8137.1912.tb05611.x</a></p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
-    <p>Astrid Deschênes, Pascal Belleau</p>
+    <p>Astrid Deschênes</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
@@ -253,48 +205,35 @@ doi: <a href='https://doi.org/10.1111/j.1469-8137.1912.tb05611.x'>https://doi.or
     end <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1909505</span>, <span class='fl'>4570601</span><span class='op'>)</span><span class='op'>)</span>, strand <span class='op'>=</span>  <span class='st'>"*"</span>,
     state <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"AMPLIFICATION"</span>, <span class='st'>"DELETION"</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='co'>## Calculating Sorensen metric for both AMPLIFICATION and DELETION</span>
-<span class='fu'>calculateOverlapMetric</span><span class='op'>(</span><span class='va'>demo</span>, method<span class='op'>=</span><span class='st'>"sorensen"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; CNV Metrics
-#&gt; Metric:
-#&gt; sorensen
-#&gt; 
-#&gt; AMPLIFICATION:
-#&gt;            sample01 sample02 sample03
-#&gt; sample01         NA       NA       NA
-#&gt; sample02 0.04647582       NA       NA
-#&gt; sample03 0.05465532        0       NA
-#&gt; 
-#&gt; 
-#&gt; DELETION:
-#&gt;           sample01 sample02 sample03
-#&gt; sample01        NA       NA       NA
-#&gt; sample02 0.0541291       NA       NA
-#&gt; sample03 0.0000000        0       NA
+<span class='co'>## The 2 samples used to calculate the metric</span>
+<span class='va'>entries</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>row<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>3</span><span class='op'>)</span>, col<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>   
+
+<span class='co'>## Calculate Sorensen metric for the amplified regions on samples 2 and 3  </span>
+<span class='fu'>CNVMetrics</span><span class='fu'>:::</span><span class='fu'>calculateOneOverlapMetricT</span><span class='op'>(</span>entry<span class='op'>=</span><span class='va'>entries</span>, segmentData<span class='op'>=</span><span class='va'>demo</span>,
+    method<span class='op'>=</span><span class='st'>"sorensen"</span>, type<span class='op'>=</span><span class='st'>"AMPLIFICATION"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $metric
+#&gt;   row col     metric
+#&gt; 1   2   1 0.04647582
+#&gt; 2   3   1 0.05465532
 #&gt; </div><div class='input'>
-<span class='co'>## Calculating Szymkiewicz-Simpson metric on AMPLIFICATION only</span>
-<span class='fu'>calculateOverlapMetric</span><span class='op'>(</span><span class='va'>demo</span>, states<span class='op'>=</span><span class='st'>"AMPLIFICATION"</span>, method<span class='op'>=</span><span class='st'>"szymkiewicz"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; CNV Metrics
-#&gt; Metric:
-#&gt; szymkiewicz
-#&gt; 
-#&gt; AMPLIFICATION:
-#&gt;            sample01 sample02 sample03
-#&gt; sample01         NA       NA       NA
-#&gt; sample02 0.07796751       NA       NA
-#&gt; sample03 1.00000000        0       NA
+<span class='co'>## Calculate Szymkiewicz-Simpson metric for the amplified regions </span>
+<span class='co'>## in samples 1 and 2  </span>
+<span class='co'>## Amplified regions of sample02 are a subset of the amplified </span>
+<span class='co'>## regions in sample01</span>
+<span class='fu'>CNVMetrics</span><span class='fu'>:::</span><span class='fu'>calculateOneOverlapMetricT</span><span class='op'>(</span>entry<span class='op'>=</span><span class='va'>entries</span>, segmentData<span class='op'>=</span><span class='va'>demo</span>,
+    method<span class='op'>=</span><span class='st'>"szymkiewicz"</span>, type<span class='op'>=</span><span class='st'>"AMPLIFICATION"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $metric
+#&gt;   row col     metric
+#&gt; 1   2   1 0.07796751
+#&gt; 2   3   1 1.00000000
 #&gt; </div><div class='input'>
-<span class='co'>## Calculating Jaccard metric on LOH only</span>
-<span class='fu'>calculateOverlapMetric</span><span class='op'>(</span><span class='va'>demo</span>, states<span class='op'>=</span><span class='st'>"LOH"</span>, method<span class='op'>=</span><span class='st'>"jaccard"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; CNV Metrics
-#&gt; Metric:
-#&gt; jaccard
-#&gt; 
-#&gt; LOH:
-#&gt;             sample01 sample02 sample03
-#&gt; sample01          NA       NA       NA
-#&gt; sample02 0.003832636       NA       NA
-#&gt; sample03          NA       NA       NA
+<span class='co'>## Calculate Sorensen metric for the deleted regions in samples 1 and 2  </span>
+<span class='fu'>CNVMetrics</span><span class='fu'>:::</span><span class='fu'>calculateOneOverlapMetricT</span><span class='op'>(</span>entry<span class='op'>=</span><span class='va'>entries</span>, segmentData<span class='op'>=</span><span class='va'>demo</span>,
+    method<span class='op'>=</span><span class='st'>"sorensen"</span>, type<span class='op'>=</span><span class='st'>"DELETION"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $metric
+#&gt;   row col    metric
+#&gt; 1   2   1 0.0541291
+#&gt; 2   3   1 0.0000000
 #&gt; </div><div class='input'>
 </div></pre>
   </div>
